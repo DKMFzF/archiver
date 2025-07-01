@@ -6,3 +6,6 @@ out
 .vs
 node_modules
 logs
+uploads
+decompressed
+compressed
