@@ -1,0 +1,23 @@
+{
+  "name": "archiver-hufman",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DKMFzF/archiver-hufman.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DKMFzF/archiver-hufman/issues"
+  },
+  "homepage": "https://github.com/DKMFzF/archiver-hufman#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^2.0.1"
+  }
+}
