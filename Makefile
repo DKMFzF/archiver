@@ -1,4 +1,4 @@
-﻿.PHONY: build start
+﻿.PHONY: build start clean
 
 build:
 	@echo "Building project..."
@@ -9,3 +9,8 @@ start: build
 	@echo "Start project..."
 	./cli/cli-mode-start.sh
 	@echo "Completion project"
+
+clean:
+	@echo "Cleaning project..."
+	rm -rf ./build
+	@echo "Clean completed"
