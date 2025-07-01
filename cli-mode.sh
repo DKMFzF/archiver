@@ -1,5 +1,27 @@
 #!/bin/bash
 
+function build_project
+{
+    echo ""
+
+    mkdir "$1/build"
+    
+    echo "[LOG] 'build' folder create"
+    
+    cd build
+    
+    echo "[LOG] start builds project"
+    
+    cmake ..
+    cmake --build .
+
+    echo ""
+    echo "[LOG] build done"
+    echo ""
+
+    cd ..
+}
+
 echo "[LOG] Start App in CLI mode"
 
 home_project_dir=$(pwd)
@@ -13,32 +35,47 @@ if ! command -v cmake &> /dev/null; then
 fi
 
 if [ -d "$home_project_dir/build" ]; then
-    echo "[LOG] folder done"
-    
-    cd build/Debug
+    echo "[LOG] 'build' folder done"
+
+    echo ""
+    echo "there is already such a folder in the repository, do you want to start with it or rebuild the project?"
+    echo ""
+
+    read -p "[y/N]: " choice
     
     echo ""
-    echo "[LOG] start app"
-    echo ""
+
+    if [[ "$choice" =~ [yY] ]]; then
+        cd build/Debug
+
+        echo "[LOG] start app"
+        echo ""
     
-    ./archiver.exe
+        ./archiver.exe
+    
+    else
+        echo "[LOG] start delete 'build' folder"
+
+        rm -rf build
+
+        echo "[LOG] 'build' folder deleted"
+
+        build_project $home_project_dir
+
+        cd build/Debug
+
+        echo "[LOG] start app"
+        echo ""
+
+        ./archiver.exe
+    fi
+
 else
     echo "[LOG] folder none"
     
-    mkdir "$home_project_dir/build"
-    
-    echo "[LOG] 'build' folder create"
-    cd build
-    
-    echo "[LOG] start builds project"
-    
-    cmake ..
-    cmake --build .
+    build_project $home_project_dir
 
-    echo ""
-    echo "[LOG] build done"
-
-    cd Debug
+    cd build/Debug
     
     echo "[LOG] start app"
     echo ""
