@@ -6,17 +6,17 @@ function build_project
 
     mkdir "$1/build"
     
-    echo "[LOG] 'build' folder create"
+    log "'build' folder create"
     
     cd build
     
-    echo "[LOG] start builds project"
+    log "start builds project"
     
     cmake ..
     cmake --build .
 
     echo ""
-    echo "[LOG] build done"
+    log " build done"
     echo ""
 
     cd ..
