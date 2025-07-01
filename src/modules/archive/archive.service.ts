@@ -1,14 +1,13 @@
 import { execFile } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
-import fs from 'fs';
 import { ArchiveOperationResult } from './types';
+import { logger } from '../../utils/logger';
 
 const execFilePromise = promisify(execFile);
 
-// Путь к архиватору относительно корня проекта
 const ARCHIVER_PATH = path.join(
-  process.cwd(), // Корень проекта
+  process.cwd(),
   'src/core/build/Debug/archiver.exe'
 );
 
@@ -18,7 +17,7 @@ export const processFile = async (
   outputPath: string
 ): Promise<ArchiveOperationResult> => {
   try {
-    console.log(`Executing archiver: ${ARCHIVER_PATH} ${operation} ${inputPath} ${outputPath}`);
+    logger.info(`Executing archiver: ${ARCHIVER_PATH} ${operation} ${inputPath} ${outputPath}`);
     
     const { stdout, stderr } = await execFilePromise(
       ARCHIVER_PATH,
@@ -29,8 +28,8 @@ export const processFile = async (
       }
     );
     
-    if (stdout) console.log('Archiver output:', stdout);
-    if (stderr) console.warn('Archiver warnings:', stderr);
+    if (stdout) logger.info(`Archiver output: ${stdout}`);
+    if (stderr) logger.error(`Archiver warnings: ${stderr}`);
     
     return { 
       success: true, 
@@ -45,7 +44,7 @@ export const processFile = async (
       }
     }
     
-    console.error('Archiver failed:', errorMessage);
+    logger.error(`Archiver failed: ${errorMessage}`);
     return { 
       success: false, 
       filePath: outputPath,
