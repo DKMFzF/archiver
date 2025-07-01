@@ -1,10 +1,4 @@
-﻿BUILD_DIR := build
-BIN_DIR := $(BUILD_DIR)/Debug
-EXECUTABLE := archiver.exe
-
-.PHONY: all build clean start test
-
-all: build
+﻿.PHONY: build start
 
 build:
 	@echo "Building project..."
