@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# CLI build project
+
 source "$(dirname "$0")/utils/log.sh"
 source "$(dirname "$0")/utils/checking-dependencies.sh"
 
-function build_project {
+function build_project
+{
     echo ""
     
     log "LOG" "Starting build process..."

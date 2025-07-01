@@ -7,9 +7,9 @@ EXECUTABLE := archiver.exe
 all: build
 
 build:
-	@echo "🔨 Building project..."
+	@echo "Building project..."
 	./cli/build.sh
-	@echo "✅ Build completed"
+	@echo "Build completed"
 
 start: build
 	@echo "Start project..."
