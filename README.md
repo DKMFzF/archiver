@@ -10,11 +10,11 @@ interaction with the core is in C++.
 First of all, we activate the startup script cli-app.sh
 
 ```bash
-chmod +x cli-app.sh
+chmod +x cli-mode.sh
 ```
 
 The second step is to launch it
 
 ```bash
-/cli-app.sh
+./cli-mode.sh
 ```
