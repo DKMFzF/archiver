@@ -200,7 +200,7 @@ int validate_file(const char* path) {
     return 1;
 }
 
-// ================== Основные функции (API осталось неизменным) ==================
+// ================== Основные функции ==================
 void compress_file(const char* input_path, const char* output_path) {
     if (!validate_file(input_path)) {
         fprintf(stderr, "Invalid input file\n");
@@ -354,7 +354,6 @@ void decompress_file(const char* input_path, const char* output_path) {
     freeHuffmanTree(root);
 }
 
-// ================== Дополнительные функции ==================
 void print_file_info(const char* path) {
     FILE* file = fopen(path, "rb");
     if (!file) {
