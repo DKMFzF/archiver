@@ -1,4 +1,4 @@
-# Archiver
+# Archiver Core
 
 This is a simple archiver for personal use.
 The project uses the Huffman encoding compression algorithm.
@@ -47,3 +47,7 @@ You will need to do the same thing to run each of the scripts.
 ## License
 
 This software is distributed under the MIT license
+
+## Author
+
+- [Dkmfzf](https://github.com/DKMFzF)
