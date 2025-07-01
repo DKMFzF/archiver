@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.12)
 project(Archiver LANGUAGES C CXX)
 
-set(C_SOURCES "src/core/archiver.c")
+set(C_SOURCES )
 set(CXX_SOURCES "src/main.cpp")
 
 add_executable(archiver 
     ${C_SOURCES}
     ${CXX_SOURCES}
-)
+ "src/core/huffman.c")
 
 set_target_properties(archiver PROPERTIES
     C_STANDARD 11

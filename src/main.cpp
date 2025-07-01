@@ -16,14 +16,14 @@ int main() {
 
     if (mode == "compress") {
         compress_file(input.c_str(), output.c_str());
-        std::cout << "File compressed!\n";
+        std::cout << "File compressed successfully!\n";
     }
     else if (mode == "decompress") {
         decompress_file(input.c_str(), output.c_str());
-        std::cout << "File decompressed!\n";
+        std::cout << "File decompressed successfully!\n";
     }
     else {
-        std::cerr << "Invalid mode!\n";
+        std::cerr << "Invalid mode! Use 'compress' or 'decompress'.\n";
         return 1;
     }
 
