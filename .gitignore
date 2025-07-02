@@ -10,3 +10,4 @@ uploads
 decompressed
 compressed
 dist
+huffman-wasm.js
