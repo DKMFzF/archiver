@@ -1,6 +1,6 @@
 import { ArchiveOperationResult } from './types';
 import { logger } from '../../utils/logger';
-import { initHuffmanModule } from '../../core/wasm/huffman.module';
+import { initHuffmanModule } from '../../core';
 
 let compressWasm: (inPath: string, outPath: string) => void;
 let decompressWasm: (inPath: string, outPath: string) => void;
