@@ -1,0 +1,11 @@
+uploads
+dist
+decompressed
+compressed
+.vs
+.gitignore
+.nvmrc
+README.md
+logs
+node_modules
+.dockerignore

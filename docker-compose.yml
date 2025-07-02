@@ -8,5 +8,4 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=production
-    depends_on: []
     restart: unless-stopped
