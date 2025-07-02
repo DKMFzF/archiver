@@ -1,15 +1,15 @@
-import { execFile } from 'child_process';
-import { promisify } from 'util';
-import path from 'path';
 import { ArchiveOperationResult } from './types';
 import { logger } from '../../utils/logger';
+import { initHuffmanModule } from '../../core/wasm/huffman.module';
 
-const execFilePromise = promisify(execFile);
+let compressWasm: (inPath: string, outPath: string) => void;
+let decompressWasm: (inPath: string, outPath: string) => void;
 
-const ARCHIVER_PATH = path.join(
-  process.cwd(),
-  'src/core/build/Debug/archiver.exe'
-);
+(async () => {
+  const mod = await initHuffmanModule();
+  compressWasm = mod.compressFile;
+  decompressWasm = mod.decompressFile;
+})();
 
 export const processFile = async (
   operation: 'compress' | 'decompress',
@@ -17,38 +17,23 @@ export const processFile = async (
   outputPath: string
 ): Promise<ArchiveOperationResult> => {
   try {
-    logger.info(`Executing archiver: ${ARCHIVER_PATH} ${operation} ${inputPath} ${outputPath}`);
-    
-    const { stdout, stderr } = await execFilePromise(
-      ARCHIVER_PATH,
-      [operation, inputPath, outputPath],
-      { 
-        windowsHide: true,
-        timeout: 30000
-      }
-    );
-    
-    if (stdout) logger.info(`Archiver output: ${stdout}`);
-    if (stderr) logger.error(`Archiver warnings: ${stderr}`);
-    
-    return { 
-      success: true, 
-      filePath: outputPath 
+    logger.info(`[WASM] ${operation} ${inputPath} -> ${outputPath}`);
+
+    if (operation === 'compress') {
+      compressWasm(inputPath, outputPath);
+    } else {
+      decompressWasm(inputPath, outputPath);
+    }
+
+    return {
+      success: true,
+      filePath: outputPath
     };
   } catch (error) {
-    let errorMessage = 'Unknown error';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-      if ('code' in error) {
-        errorMessage += ` (code: ${error.code})`;
-      }
-    }
-    
-    logger.error(`Archiver failed: ${errorMessage}`);
-    return { 
-      success: false, 
+    return {
+      success: false,
       filePath: outputPath,
-      error: errorMessage
+      error: (error as Error).message
     };
   }
 };
