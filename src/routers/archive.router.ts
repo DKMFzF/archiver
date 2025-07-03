@@ -4,12 +4,32 @@ import { compressFile, decompressFile } from '../modules/archive/archive.control
 
 const router = Router();
 
-router.post('/compress', upload.single('file'), (req, res, next) => {
-  compressFile(req, res, next).catch(next);
-});
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 
-router.post('/decompress', upload.single('file'), (req, res, next) => {
-  decompressFile(req, res, next).catch(next);
-});
+function withTiming(
+  label: string,
+  handler: (req: Request, res: Response, next: NextFunction) => any
+): RequestHandler {
+  return async (req, res, next) => {
+    const start = process.hrtime.bigint();
+
+    res.on('finish', () => {
+      const end = process.hrtime.bigint();
+      const durationMs = Number(end - start) / 1_000_000;
+      console.log(`[${label}] обработан за ${durationMs.toFixed(2)} мс`);
+    });
+
+    try {
+      await handler(req, res, next);
+    } catch (err) {
+      next(err);
+    }
+  };
+}
+
+
+
+router.post('/compress', upload.single('file'), withTiming('compress', compressFile));
+router.post('/decompress', upload.single('file'), withTiming('decompress', decompressFile));
 
 export { router };
