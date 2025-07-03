@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "postbuild": "sh core-wasm-deploy.sh",
+    "build": "tsc && npm run postbuild",
     "dev": "ts-node-dev src/index.ts",
     "start": "ts-node src/index.ts"
   },
