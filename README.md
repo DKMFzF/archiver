@@ -1,15 +1,20 @@
 # Archiver Huffman API
 
-The API provides file compression and decompression functionality using a custom Huffman coding algorithm implemented in C++ with a Node.js interface.
+The API provides file compression and decompression functionality using a custom Huffman coding algorithm implemented in C++ with a API on Node.js.
 
 ## Table of Contents
 
+- [Architecture](#architecture)
 - [Quick launch](#quick-launch)
 - [Tech stack](#tech-stack)
 - [API Endpoints](#api-endpoints)
 - [Request/Response Examples](#requestresponse-examples)
 - [Error Handling](#error-handling)
 - [Documentation for Core](./src/core/README.md)
+
+## Architecture
+
+![Architecture](./docs/architecture.png)
 
 ## Quick launch
 
@@ -25,14 +30,7 @@ After installing the dependencies, you need to build the project.
 npm run build | yarn build
 ```
 
-After that, you need to reset the program core.
-
-***To do this, you need to have cmake and makefile in global dependencies.*** If these dependencies are not present, follow the link and follow the assembly [instructions](./src/core/README.md).
-
-```bash
-chmod +x ./core-build.sh
-./core-build.sh
-```
+[If you want to run the api in CLI mode](./src/core/)
 
 Then run the startup script
 
