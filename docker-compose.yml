@@ -1,4 +1,13 @@
 services:
+  redis:
+      image: redis:7
+      container_name: redis
+      ports:
+        - "6379:6379"
+      volumes:
+        - redis_data:/data
+      restart: unless-stopped
+
   archive-api:
     build: .
     ports:
@@ -9,3 +18,6 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+
+volumes:
+  redis_data:
