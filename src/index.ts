@@ -1,6 +1,11 @@
 import app from './app';
-import { logger } from './utils/logger';
 import 'dotenv/config'
+
+import { logger } from './utils/logger';
+
+/**
+ * start server file
+ */
 
 const { PORT = 3000 } = process.env;
 

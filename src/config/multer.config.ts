@@ -2,13 +2,15 @@ import path from 'path';
 import multer from 'multer';
 import { existsSync, mkdirSync } from 'fs';
 
+/**
+ * the multer config for working with files
+ */
+
 const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    if (!existsSync(UPLOAD_DIR)) {
-      mkdirSync(UPLOAD_DIR, { recursive: true });
-    }
+    if (!existsSync(UPLOAD_DIR)) kdirSync(UPLOAD_DIR, { recursive: true });
     cb(null, UPLOAD_DIR);
   },
   filename: (req, file, cb) => {

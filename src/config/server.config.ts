@@ -1,5 +1,9 @@
 import express from 'express';
 
+/**
+ * server config file
+ */
+
 export const createServer = () => {
   const app = express();
   
