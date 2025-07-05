@@ -1,5 +1,7 @@
-﻿.PHONY: build start clean
+﻿
+# scripts configs
 
+.PHONY: build start clean
 build:
 	@echo "Building project..."
 	./cli/build.sh
